@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.metehan.socketprogramming;
 
-/**
- *
- * @author metehan
- */
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -23,6 +15,7 @@ public class ChatServer extends Thread {
     public ChatServer(int port) throws IOException {
         serverSocket = new ServerSocket(port);
     }
+
 
     @Override
     public void run() {
@@ -54,6 +47,10 @@ public class ChatServer extends Thread {
 
         }
 
+    }
+
+    public List<ChatHandler> getHandlerList() {
+        return handlerList;
     }
 
     public static void main(String[] args) throws IOException {

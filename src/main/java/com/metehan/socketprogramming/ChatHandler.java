@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.metehan.socketprogramming;
 
-/**
- *
- * @author metehan
- */
 import java.io.*;
 import java.net.Socket;
 
@@ -38,11 +30,15 @@ public class ChatHandler extends Thread {
         while (true) {
             try {
                 String request = reader.readLine();
-                System.out.println("İstemciden gelen istek " + request);
+                System.out.println("İstemciden gelen istek "+ request);
+                if(request ==null ){
+                    throw new Exception();
+                }
                 server.send(this, request);
-
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("İstemci bağlantıyı kopardı");
+                server.getHandlerList().remove(this);
+                break;
             }
 
         }
@@ -53,6 +49,7 @@ public class ChatHandler extends Thread {
         try {
             writer.write(response+"\r\n");
             writer.flush();
+            System.out.println("İstemciye gönderilen istek " + response);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -60,4 +57,3 @@ public class ChatHandler extends Thread {
 
 
 }
-
